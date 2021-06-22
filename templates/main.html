@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<!link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'/>
+<title>Turning Biology into Technology: Neural Networks</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!link href="{{url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+    body, html {
+      height: 100%;
+      font-family: "Inconsolata", sans-serif;
+    }
+
+    .bgimg {
+      background-position: center;
+      background-size: cover;
+      background-image: url("/static/background.jpg");
+      min-height: 75%;
+    }
+
+    .menu {
+      display: none;
+    }
+</style>
+
+<body>
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+      <div class="w3-row w3-padding w3-black">
+        <div class="w3-col s3">
+          <a href="/" class="w3-button w3-block w3-black">HOME</a>
+        </div>
+        <div class="w3-col s3">
+          <a href="/ConvNet" class="w3-button w3-block w3-black">Convolutional Neural Network</a>
+        </div>
+        <div class="w3-col s3">
+          <a href="/MultiPerceptron" class="w3-button w3-block w3-black">MultiPerceptron</a>
+        </div>
+        <div class="w3-col s3">
+          <a href="/RNN" class="w3-button w3-block w3-black">Recurrent Neural Network</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Header with image -->
+    <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+      <div class="w3-display-middle w3-center">
+        <span class="w3-text-white" style="font-size:90px">Turning Biology into Technology:<br>Neural Networks</span>
+      </div>
+      <div class="w3-display-bottommiddle w3-center w3-padding-large">
+        <span class="w3-text-white">Rajeev Datta</span>
+      </div>
+    </header>
+    
+    <!-- Add a background color and large text to the whole page -->
+    <div class="w3-sand w3-grayscale w3-large">
+    <!-- About Container -->
+    <div class="w3-container" id="about">
+      <div class="w3-content" style="max-width:700px">
+        <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT THE WEBSITE</span></h5>
+        <p>The following website has been designed to give biology students an opportunity to understand the concepts revolving around neural networks.<br> Through tinkering with <abbr title="paramaters that can be changed by neural network">hyper parameters</abbr> and viewing the videos on the site, students can start to piece together a complete understanding of neural networks.</p>
+        <div class="w3-panel w3-leftbar w3-light-grey">
+          <p><i>"Whatever you are studying right now, if you are not getting up to speed on deep learning, neural networks, etc., you lose. We are going through the process where software will automate software, automation will automate automation."</i></p>
+          <p>Mark Cuban</p>
+        </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/DG5-UyRBQD4" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Menu Container -->
+    <div class="w3-container" id="menu">
+      <div class="w3-content" style="max-width:700px">
+
+        <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Activation Functions</span></h5>
+
+        <div class="w3-row w3-center w3-card w3-padding">
+          <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
+            <div class="w3-col s6 tablink">Diagrams</div>
+          </a>
+          <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');">
+            <div class="w3-col s6 tablink">Descriptions</div>
+          </a>
+        </div>
+
+        <div id="Eat" class="w3-container menu w3-padding-48 w3-card">
+          <img src="{{url_for('static', filename='function.jpg')}}" alt="activation functions of neural networks">
+          <img src="{{url_for('static', filename='network.jpg')}}"  alt="neural network function">
+        </div>
+
+        <div id="Drinks" class="w3-container menu w3-padding-48 w3-card">
+          <h5>Unit Step(Heaviside)</h5>
+          <p class="w3-text-grey">Basically, the Heaviside step function, or the unit step function, usually denoted by a slanted H or θ (but sometimes u, 1 or 𝟙), is a discontinuous piece wise function where the output is 0 for negative inputs, 0.5 for an input of zero, and 1 for positive inputs. This function is like a more rough approximation of the logistic function. The unit step function is most often utilized as a distribution; and, is how the function's used in neural networks. Moreover, in neural networks, the function tries to play the role of a neuron by creating an artificial threshold where the neuron will spike. These artificial neurons can be found in the multiperceptron model. Unfortunately, the unit step function loses a lot of important information --for the back propagation and loss functions-- in the process of firing.</p><br>
+
+          <h5>Sign (Signum)</h5>
+          <p class="w3-text-grey">The sign function(or signum function) is basically a variation of the step function. So, the function is used in neural networks identically and has a distribution that looks extremely similiar. However, the sign function introduces negative values to activation functions and is an odd mathematical function.</p><br>
+
+          <h5>Linear</h5>
+          <p class="w3-text-grey">The linear activation function is pretty much useless because it takes away the idea of deep learning all together. So, you really shouldn't pay much attention to this type of activation function. </p><br>
+
+          <h5>Piece-wise Linear</h5>
+          <p class="w3-text-grey">The piece-wise linear function, unlike the linear, is a nonlinear activation function, so it can be used to train neural networks. Basically, the idea of this one is to introduce nonlinearity with the least amount of work possible. However, the minimilistic model of the piece-wise linear function does not make it the best activation function for every situation.</p><br>
+            
+          <h5>Logistic (sigmoid)</h5>
+          <p class="w3-text-grey">The logistic function is used a lot due to it's smooth nature. So, the function can map any output to a probability between 0 and 1: allowing the loss function to be more useful.</p><br>
+
+          <h5>Hyperbolic tangent</h5>
+          <p class="w3-text-grey">Hyperbolic tangent function, or tanh function, is a variation of the logistic function. The function is different in the way that it can have a negatve output, but everything else is pretty much the same.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- End page content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a> and Flask</p>
+    </footer>
+
+    <script>
+    // Tabbed Menu
+    function openMenu(evt, menuName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("menu");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+      }
+      document.getElementById(menuName).style.display = "block";
+      evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+    }
+    document.getElementById("myLink").click();
+    </script>
+
+    </body>
+</html>
+    

@@ -1,0 +1,83 @@
+{% extends "header.html" %}
+{% block body %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>AJAX example</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('input[name="learning_rate"]').val(0.001);
+        $('input[name="training_iters"]').val(20000);
+        $('input[name="batch_size"]').val(128)
+        $('input[name="display_step"]').val(10)
+        $('a#process_input').bind('click', function() {
+            $.getJSON($SCRIPT_ROOT + '/background_process', {
+                learning_rate: $('input[name="learning_rate"]').val(),
+                training_iters: $('input[name="training_iters"]').val(),
+                batch_size: $('input[name="batch_size"]').val(),
+                display_step: $('input[name="display_step"]').val()
+            }, $(function() {
+                    $.each(ConvResult, function(i, item) {
+                        var $tr = $('<tr>').append(
+                            $('<td>').text(item.rank),
+                            $('<td>').text(item.content),
+                            $('<td>').text(item.UID)
+                        ); //.appendTo('#records_table');
+                        console.log($tr.wrap('<p>').html());
+                    });
+                });
+        return false;
+        });
+    });
+    </script>
+    <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Convolutional Neural Network Site</h1>
+    <div class="title">
+        <h3>Post Hyper Parameter Values</h3>
+    </div>
+    
+    <div id="content">
+        <form method="post" action="{{ url_for('background_process')}}">
+            <label for="learning_rate">Please enter a value for the hyper parameter learning rate:</label>
+            <input type="number" name="learning_rate" value="0.001" step="0.001" min="0"max="1"/><br />
+            <label for="training_iters">Please enter a value for the hyper parameter training iterations:</label>
+            <input type="number" name="training_iters" value="20000" min="100" max="500000"/><br />
+            <label for="batch_size">Please enter a value for the hyper parameter batch size:</label>
+            <input type="number" name="batch_size" value="128" min="1" max="1000"/><br />
+            <label for="display_step">Please enter a value for the hyper parameter display step:</label>
+            <input type="number" name="display_step" value="10" min="0" max="100" step="0.01"/><br />
+            <a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
+            <input type="reset" />
+        </form>
+        <table class="my_table">
+            <tr>
+                <th>Images Seen</th>
+                <th>Training Accuracy</th>
+            </tr>
+        </table>
+    </div>
+</body>
+{% endblock %}
